@@ -1,0 +1,512 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #f5f6fa;
+  --text-color: #2d3436;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px var(--shadow-color);
+  backdrop-filter: blur(10px);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideIn 0.6s ease-out forwards;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  display: inline-block;
+  position: relative;
+}
+
+h1 i {
+  margin-right: 10px;
+  color: var(--primary-color);
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #00c6fb 0%, #005bea 100%);
+  transform: translateX(-50%);
+  border-radius: 2px;
+  animation: widthAnim 0.6s ease-out forwards;
+}
+
+.search-container {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  background: var(--secondary-color);
+  font-size: 1rem;
+  transition: all var(--transition-speed);
+  box-shadow: inset 0 2px 5px var(--shadow-color);
+}
+
+#searchInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+}
+
+.search-icon {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  background: var(--secondary-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  font-size: 1rem;
+}
+
+.tab-btn i {
+  margin-right: 8px;
+}
+
+.tab-btn.active {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.badge {
+  background: #e74c3c;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  margin-left: 5px;
+  display: none; /* Hide by default */
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.content-section {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.content-section.active {
+  display: block;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.friend-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all var(--transition-speed);
+  box-shadow: 0 4px 6px var(--shadow-color);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.friend-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.friend-avatar i {
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+
+.friend-info {
+  flex: 1;
+}
+
+.friend-name {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.friend-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--secondary-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.action-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.friends-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.friend-item {
+  background: white;
+  margin: 0;
+  padding: 20px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+  animation-delay: calc(var(--item-index) * 0.1s);
+}
+
+.friend-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.friend-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.05);
+}
+
+.friend-item:hover::before {
+  opacity: 1;
+}
+
+.friend-item:active {
+  transform: scale(0.98);
+}
+
+/* Add these new styles for search results */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.no-results {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+  background: var(--secondary-color);
+  border-radius: 12px;
+  margin: 1rem;
+}
+
+#searchResults {
+  display: none;
+}
+
+#searchResults:not(.hidden) {
+  display: block;
+}
+
+/* Style dla przycisków usuwania znajomych i obsługi zaproszeń */
+.friend-actions button,
+.requests-list button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--secondary-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  font-size: 0.9rem;
+  margin: 0 0.25rem;
+}
+
+.friend-actions button:hover,
+.requests-list button:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
+}
+
+/* Specjalne style dla przycisków akceptacji i odrzucenia */
+.requests-list button[onclick*="accept"] {
+  background: #4caf50;
+  color: white;
+}
+
+.requests-list button[onclick*="reject"] {
+  background: #f44336;
+  color: white;
+}
+
+.requests-list button[onclick*="accept"]:hover {
+  background: #45a049;
+}
+
+.requests-list button[onclick*="reject"]:hover {
+  background: #da190b;
+}
+
+/* Style dla listy zaproszeń */
+.requests-list {
+  padding: 1rem;
+}
+
+.requests-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.requests-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all var(--transition-speed);
+}
+
+.back-button,
+.theme-toggle {
+  position: fixed;
+  width: 45px;
+  height: 45px;
+  background: var(--card-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.back-button {
+  top: 20px;
+  left: 20px;
+}
+
+.theme-toggle {
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+.theme-toggle .theme-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-color);
+  transition: transform 0.5s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: rotate(180deg);
+}
+
+.back-button:hover,
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.back-button i {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover i {
+  transform: translateX(-3px);
+}
+
+.theme-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-color);
+  transition: transform 0.5s ease;
+}
+
+theme-toggle:hover .theme-icon {
+  transform: rotate(180deg);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes widthAnim {
+  from {
+    width: 0;
+  }
+  to {
+    width: 60px;
+  }
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2.2em;
+  }
+
+  .friends-list {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs {
+    flex-direction: column;
+  }
+
+  .friend-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .friend-actions {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .container,
+  .friend-item,
+  h1::after {
+    animation: none;
+    transform: none;
+  }
+}

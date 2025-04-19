@@ -1,0 +1,5 @@
+{
+    "require": {
+        "consoletvs/profanity": "^3.5"
+    }
+}

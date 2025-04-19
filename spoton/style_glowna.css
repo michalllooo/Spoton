@@ -1,0 +1,186 @@
+/* style_glowna.css */
+
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+/* Global Styles */
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(139, 146, 148, 1) 70%
+  );
+  transition: background 0.3s ease-in-out;
+}
+
+/* Sidebar Styles */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: #2c3e50;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transform: translateX(-100%);
+}
+
+.sidebar:not(.hidden) {
+  transform: translateX(0);
+}
+
+.hidden {
+  display: none;
+}
+
+.sidebar h2 {
+  color: #ecf0f1;
+  text-align: center;
+  padding: 20px 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 15px;
+  border-bottom: 1px solid #34495e;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar li:hover {
+  background-color: #34495e;
+}
+
+.sidebar li a {
+  text-decoration: none;
+  color: #ecf0f1;
+  display: block;
+  transition: color 0.3s ease-in-out;
+}
+
+.sidebar li a:hover {
+  color: #1abc9c;
+}
+
+.sidebar .user-icon {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .user-icon img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Menu Toggle Styles */
+
+.menu-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #2c3e50;
+  transition: color 0.3s ease-in-out;
+}
+
+.menu-toggle:hover {
+  color: #1abc9c;
+}
+
+/* Map Container Styles */
+
+.map-container {
+  height: 100vh; /* 100% wysokości widoku przeglądarki */
+  margin: 0; /* Usuń marginesy */
+  padding: 0; /* Usuń odstępy */
+}
+
+#map {
+  height: 100%; /* Wypełnij cały kontener */
+  width: 100%; /* Wypełnij cały kontener */
+  margin: 0; /* Usuń marginesy */
+  padding: 0; /* Usuń odstępy */
+}
+
+/* Leaflet Map Styles */
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+}
+
+.leaflet-control-attribution {
+  font-size: 12px;
+}
+
+.map-container .leaflet-container {
+  height: 100%;
+}
+
+.leaflet-container {
+  overflow: hidden;
+}
+
+/* Animations */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sidebar,
+.map-container {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    transform: translateX(0);
+  }
+
+  .map-container {
+    margin-left: 0;
+    height: auto;
+  }
+
+  #map {
+    width: 100%;
+    height: 400px;
+  }
+}
+#login{
+  color: white;
+}
+a {
+  color: rgb(134, 239, 255);
+}

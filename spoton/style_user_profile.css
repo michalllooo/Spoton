@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #625dff;
+  --secondary-color: #33c3e7;
+  --background-color: #f5f7fa;
+  --text-color: #2c3e50;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, var(--background-color) 0%, #c3cfe2 100%);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.profile-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.8rem;
+  text-align: center;
+}
+
+h1:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border-radius: 2px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+  position: relative;
+  padding-left: 1rem;
+}
+
+h2:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border-radius: 2px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.8rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  animation: slideIn 0.3s ease-out forwards;
+  transform: translateY(20px);
+  opacity: 0;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+.button-container {
+  margin-top: 1.5rem;
+}
+
+button {
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  margin-right: 0.8rem;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(98, 93, 255, 0.3);
+}
+
+.collapsible {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.collapsible:hover {
+  background: linear-gradient(45deg, #2980b9, #3498db);
+}
+
+.content {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Navigation buttons */
+.back-button,
+.theme-toggle {
+  position: fixed;
+  width: 45px;
+  height: 45px;
+  background: var(--card-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.back-button {
+  top: 20px;
+  left: 20px;
+}
+
+.theme-toggle {
+  bottom: 20px;
+  right: 20px;
+}
+
+.back-button:hover,
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+.back-button i {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover i {
+  transform: translateX(-3px);
+}
+
+.theme-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-color);
+  transition: transform 0.5s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: rotate(180deg);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+}

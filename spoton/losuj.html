@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Losuj Spot</title>
+    <link id="theme-stylesheet" rel="stylesheet" href="style_losuj_light.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script>
+      function updateTheme() {
+        const darkTheme = localStorage.getItem("darkTheme") === "true";
+        const themeStylesheet = document.getElementById("theme-stylesheet");
+        themeStylesheet.href = darkTheme
+          ? "style_losuj_dark.css"
+          : "style_losuj_light.css";
+        document.body.classList.toggle("dark-theme", darkTheme);
+      }
+
+      document.addEventListener("DOMContentLoaded", updateTheme);
+      window.addEventListener("storage", updateTheme);
+    </script>
+  </head>
+  <body>
+    <div
+      class="back-button"
+      onclick="window.location.href='index.php'"
+      title="Back to main page"
+    >
+      <i class="fas fa-arrow-left"></i>
+    </div>
+
+    <div class="container">
+      <h1>Losuj Punkt na Mapie</h1>
+      <div class="radius-container">
+        <label for="radius-slider"
+          >Wybierz promień (km): <span id="radius-value">10</span></label
+        >
+        <input
+          type="range"
+          id="radius-slider"
+          min="1"
+          max="50"
+          value="10"
+          class="modern-range"
+        />
+      </div>
+      <button id="losuj-spot-btn" class="modern-button">
+        <i class="fas fa-random"></i>
+        Losuj Spot
+      </button>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle" title="Toggle theme">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        class="theme-icon"
+      >
+        <path
+          class="sun-icon"
+          d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"
+        />
+      </svg>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const radiusSlider = document.getElementById("radius-slider");
+        const radiusValue = document.getElementById("radius-value");
+        const losujSpotBtn = document.getElementById("losuj-spot-btn");
+
+        // Aktualizacja wyświetlanej wartości promienia
+        radiusSlider.addEventListener("input", () => {
+          radiusValue.textContent = radiusSlider.value;
+        });
+
+        // Funkcja losowania spota
+        losujSpotBtn.addEventListener("click", () => {
+          if (!navigator.geolocation) {
+            alert("Twoja przeglądarka nie obsługuje geolokalizacji.");
+            return;
+          }
+
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+              const radius = radiusSlider.value;
+
+              fetch(
+                `losuj.php?latitude=${latitude}&longitude=${longitude}&radius=${radius}`
+              )
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data.error) {
+                    alert(`Błąd: ${data.error}`);
+                    return;
+                  }
+                  const url = `index.php?lat=${data.latitude}&lon=${data.longitude}`;
+                  window.location.href = url; // Redirect to map with coordinates
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                  alert("Wystąpił błąd podczas losowania spota.");
+                });
+            },
+            (error) => {
+              alert("Nie udało się pobrać Twojej lokalizacji.");
+              console.error("Geolocation error:", error);
+            }
+          );
+        });
+      });
+
+      // Theme toggle functionality
+      const themeToggle = document.getElementById("themeToggle");
+
+      themeToggle.addEventListener("click", () => {
+        const isDarkTheme = localStorage.getItem("darkTheme") === "true";
+        localStorage.setItem("darkTheme", !isDarkTheme);
+        updateTheme();
+      });
+    </script>
+  </body>
+</html>
